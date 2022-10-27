@@ -11,16 +11,16 @@ const LABEL_FILENAME = "Etiqueta de envio.txt"
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const createTmpFolders = () => {
-  if (!fs.existsSync('tmp/uploads'))
-    fs.mkdirSync('tmp/uploads', {recursive: true})
-  if (!fs.existsSync('tmp/unzips/'))
-    fs.mkdirSync('tmp/unzips/', {recursive: true})
+  if (!fs.existsSync('tmp-uploads'))
+    fs.mkdirSync('tmp-uploads', {recursive: true})
+  if (!fs.existsSync('tmp-unzips'))
+    fs.mkdirSync('tmp-unzips/', {recursive: true})
 }
 
 export default function handler(req, res) {
   createTmpFolders()
   const form = formidable({
-    uploadDir: 'tmp/uploads',
+    uploadDir: 'tmp-uploads',
     keepExtensions: true
   })
 
@@ -31,7 +31,7 @@ export default function handler(req, res) {
     if ( !pathToZip.endsWith(".zip") )
       return res.status(400).json({ error: 'no es un archivo .zip' })
 
-    const pathToUnzip: string = `tmp/unzips/${(new Date()).getTime()}`
+    const pathToUnzip: string = `tmp-unzips/${(new Date()).getTime()}`
 
     const zip = new AdmZip(pathToZip)
     try {
