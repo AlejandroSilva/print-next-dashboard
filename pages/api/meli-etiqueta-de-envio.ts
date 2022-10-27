@@ -21,7 +21,7 @@ const createTmpFolders = () => {
 export default function handler(req, res) {
   createTmpFolders()
   const form = formidable({
-    uploadDir: 'tmp-uploads',
+    uploadDir: path.dirname('tmp-uploads'),
     keepExtensions: true
   })
 
@@ -32,7 +32,7 @@ export default function handler(req, res) {
     if ( !pathToZip.endsWith(".zip") )
       return res.status(400).json({ error: 'no es un archivo .zip' })
 
-    const pathToUnzip: string = `tmp-unzips/${(new Date()).getTime()}`
+    const pathToUnzip: string = `${path.dirname('tmp-unzips')}/${(new Date()).getTime()}`
 
     const zip = new AdmZip(pathToZip)
     try {
