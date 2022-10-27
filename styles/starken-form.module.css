@@ -1,0 +1,6 @@
+.starkenForm {
+    width: 100%;
+    max-width: 40rem;
+    min-height: 10rem;
+    border: 1px solid salmon;
+}
