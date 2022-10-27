@@ -11,9 +11,9 @@ const LABEL_FILENAME = "Etiqueta de envio.txt"
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const createTmpFolders = () => {
-  if (!fs.existsSync('tmp-uploads'))
-    fs.mkdirSync('tmp-uploads', {recursive: true})
-  if (!fs.existsSync('tmp-unzips'))
+  if (!fs.existsSync('tmp-uploads/'))
+    fs.mkdirSync('tmp-uploads/', {recursive: true})
+  if (!fs.existsSync('tmp-unzips/'))
     fs.mkdirSync('tmp-unzips/', {recursive: true})
 }
 
