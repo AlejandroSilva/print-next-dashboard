@@ -18,7 +18,7 @@ const ensureFolder = (folder) => {
 
 export default function handler(req, res) {
   const form = formidable({
-    uploadDir: ensureFolder(process.cwd()+'/tmp/uploads'),
+    uploadDir: ensureFolder('./tmp/uploads'),
     keepExtensions: true
   })
 
