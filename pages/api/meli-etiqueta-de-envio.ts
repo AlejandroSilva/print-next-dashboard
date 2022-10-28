@@ -29,15 +29,15 @@ export default function handler(req, res) {
 
     const pathToZip = files.fileToPrint.filepath
     if ( !pathToZip.endsWith(".zip") )
-      return res.status(400).json({ error: 'no es un archivo .zip' })
+      return res.status(400).json({ message: 'no es un archivo .zip', pathToZip })
 
     const pathToUnzip: string = `'/tmp/unzips'/${(new Date()).getTime()}`
 
     const zip = new AdmZip(pathToZip)
     try {
       zip.extractEntryTo(LABEL_FILENAME, pathToUnzip)
-    } catch {
-      return res.status(500).json({ error: `archivo '${LABEL_FILENAME}' no encontrado`})
+    } catch (error) {
+      return res.status(500).json({ message: `archivo '${LABEL_FILENAME}' no encontrado`, error})
     }
     const txtFile = `${pathToUnzip}/${LABEL_FILENAME}`
     const streamFile = fs.createReadStream(txtFile)
