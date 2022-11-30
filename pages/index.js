@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-import { MeliForm } from '../components/meli-form'
+import { MeliEtiquetaEnvioForm } from '../components/meli-etiqueta-envio-form'
 import { StarkenForm } from '../components/starken-form'
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <MeliForm />
+        <MeliEtiquetaEnvioForm />
 
         {/*<StarkenForm />*/}
       </main>

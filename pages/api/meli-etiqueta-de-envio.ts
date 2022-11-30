@@ -3,7 +3,7 @@ import FormData from 'form-data'
 const formidable = require( 'formidable')
 const AdmZip = require('adm-zip')
 
-const PRINT_SERVER = process.env.PRINT_SERVER
+const PRINT_FILE_ENDPOINT = process.env.PRINT_SERVER + "/api/print-file"
 const PRINTER = process.env.PRINTER
 const MEDIA = process.env.MEDIA
 const LABEL_FILENAME = "Etiqueta de envio.txt"
@@ -45,17 +45,17 @@ export default function handler(req, res) {
     formData.append('printer', PRINTER)
     formData.append('fileToPrint', streamFile)
     // @ts-ignore
-    return fetch(PRINT_SERVER, { method: 'POST', body: formData })
+    return fetch(PRINT_FILE_ENDPOINT, { method: 'POST', body: formData })
       .then(response => {
-        console.log(response)
+        // console.log(response)
         return response.json()
       })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         res.status(200).json(data)
       })
       .catch(error => {
-        console.error(error)
+        // console.error(error)
         res.status(500).json(error)
       })
   })
