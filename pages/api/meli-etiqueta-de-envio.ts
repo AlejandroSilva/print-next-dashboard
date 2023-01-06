@@ -8,8 +8,6 @@ const PRINTER = process.env.PRINTER
 const MEDIA = process.env.MEDIA
 const LABEL_FILENAME = "Etiqueta de envio.txt"
 
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 const ensureFolder = (folder) => {
   if (!fs.existsSync(folder))
     fs.mkdirSync(folder, {recursive: true})
@@ -44,10 +42,12 @@ export default function handler(req, res) {
     formData.append('media', MEDIA)
     formData.append('printer', PRINTER)
     formData.append('fileToPrint', streamFile)
+    console.log({ MEDIA, PRINTER, streamFile })
+
     // @ts-ignore
     return fetch(PRINT_FILE_ENDPOINT, { method: 'POST', body: formData })
       .then(response => {
-        // console.log(response)
+        console.log({ response })
         return response.json()
       })
       .then(data => {
@@ -55,8 +55,8 @@ export default function handler(req, res) {
         res.status(200).json(data)
       })
       .catch(error => {
-        // console.error(error)
-        res.status(500).json(error)
+        console.error(error)
+        res.status(501).json(error)
       })
   })
 }
